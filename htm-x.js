@@ -73,6 +73,36 @@ function addChildren(e, children) {
   }
 }
 
+/*    understand/
+ * return a generator that creates a defined element
+ * with the given attributes
+ *    div = x('div')
+ *    div2 = x('div', { classes: 'big black' })
+ *
+ *    div("Content inside div")
+ *    div2([
+ *      div("Content inside div"],
+ *      "Wrapped in content with 'big black' class"
+ *    ])
+ */
+function x(tag, attr_) {
+  if(!attr_) return (attr, children) => h(tag, attr, children)
+
+  return (attr, children) => {
+
+    if(typeof attr == 'string' || Array.isArray(attr)) {
+      children = attr
+      attr = attr_
+    } else {
+      attr = Object.assign(attr_, attr)
+    }
+
+    return h(tag, attr, children)
+  }
+}
+
 module.exports = {
-  h
+  h,
+  x,
+  div: x('div'),
 }
