@@ -1,0 +1,16 @@
+{
+  "name": "htm-x",
+  "version": "1.0.0",
+  "description": "Simple and Clean HTML Node Generator",
+  "main": "html.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theproductiveprogrammer/htm-x.git"
+  },
+  "author": "charles.lobo@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theproductiveprogrammer/htm-x/issues"
+  },
+  "homepage": "https://github.com/theproductiveprogrammer/htm-x#readme"
+}
