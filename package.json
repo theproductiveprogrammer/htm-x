@@ -1,6 +1,6 @@
 {
   "name": "htm-x",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Simple and Clean HTML Node Generator",
   "main": "html.js",
   "repository": {
