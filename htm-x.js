@@ -61,7 +61,7 @@ function addChildren(e, children) {
   if(Array.isArray(children)) {
     for(let i = 0;i < children.length;i++) {
       let curr = children[i]
-      if(typeof curr == 'string') {
+      if(!isNode(curr)) {
         curr = document.createTextNode(curr)
       }
       e.appendChild(curr)
@@ -69,9 +69,13 @@ function addChildren(e, children) {
   } else if(typeof children == "string") {
     e.innerHTML = children
   } else {
-    e.appendChild(children)
+    let node = children
+    if(!isNode(node)) node = document.createTextNode(node)
+    e.appendChild(node)
   }
 }
+
+function isNode(e) { return e && e.nodeName && e.nodeType }
 
 /*    understand/
  * return a generator that creates a defined element
@@ -100,6 +104,7 @@ function x(tag, attr_) {
     return h(tag, attr, children)
   }
 }
+
 
 module.exports = {
   h,
