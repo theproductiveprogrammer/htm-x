@@ -5,7 +5,7 @@
  * attributes and children
  */
 function h(tag, attr, children) {
-  if(typeof attr == 'string' || Array.isArray(attr)) {
+  if(typeof attr != 'object' || Array.isArray(attr)) {
     children = attr
     attr = {}
   }
