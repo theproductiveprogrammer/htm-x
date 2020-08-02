@@ -61,11 +61,18 @@ bigText({style: { color: "red" }}, "But Red is better")
 Being functional, custom tags are also composable so you can do nice things like:
 
 ```javascript
-const ul = x('ul', { classes: "my-list"})
-const li = x('li')
+const ul = x('ul', { classes: "my-component"})
+const li = x('li', { onclick: e => alert(e.target.innerText) })
 const myComponent = (items) => {
   return ul(items.map(li))
 }
+myComponent(["item1", "item2", "item3"])
+// ==>
+//  <ul class="my-component">
+//    <li>item1</li>
+//    <li>item2</li>
+//    <li>item3</li>
+//  </ul>
 ```
 
 
