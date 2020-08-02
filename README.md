@@ -6,32 +6,50 @@ Simple and Clean HTML node generator.
 
 ## Usage
 
+`htm-x` is a simple wrapper around [`createElement()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) that makes it easier to use in one simple step:
+
 ```javascript
-const { h, div, x } = require('@tpp/htm-x')
+div("Text inside div")
+```
 
-/*** Basic Usage ***/
-h('a', { href: "www.abc.com"}, "ABC")
+This is especially helpful when we want to embed content cleanly:
 
-h('div', [
+```javascript
+div([
   h('img', { src: "test.png"}),
-  h('span', {
-    classes: "big small",
-    style: { color: "red" },
-    onclick: (e) => ...,
-  }, "Click me too")
-  "Just some text"
+  "Text Content"
 ])
+```
 
-/*** Most of the time we need divs ***/
-div("Content")
-div({classes: "class1 class2"}, "Content")
+We can also add classes, styles, and any other attributes:
 
-/*** We can create our own custom functions ***/
+```javascript
+div({
+  classes: "class1 class2",
+  style: { color: "blue" }
+}, "Content can be text, children, or just a single child")
+```
+
+Besides `div()`’s we can create any other types we want:
+
+```javascript
+const { div, h, x } = require('@tpp/htm-x')
+
+h('a', { href: "www.abc.com"}, "ABC")
+h('span', {
+  classes: "big small",
+  style: { color: "red" },
+  onclick: (e) => ...,
+}, "Click me too")
+```
+
+Helpfully we can also create our own custom tag functions that can hold components applicable to our project:
+
+```javascript
 const span = x('span')
 span("content")
 span({style: { color: "blue" }}, "content")
 
-/*** Or use custom components ***/
 const bigText = x('span', {
   classes: "big black",
   style: { color: "green" }
@@ -39,6 +57,18 @@ const bigText = x('span', {
 bigText("Green is Good")
 bigText({style: { color: "red" }}, "But Red is better")
 ```
+
+Being functional, custom tags are also composable so you can do nice things like:
+
+```javascript
+const ul = x('ul', { classes: "my-list"})
+const li = x('li')
+const myComponent = (items) => {
+  return ul(items.map(li))
+}
+```
+
+
 
 ---
 
