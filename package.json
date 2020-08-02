@@ -2,7 +2,7 @@
   "name": "@tpp/htm-x",
   "version": "0.1.0",
   "description": "Simple and Clean HTML Node Generator",
-  "main": "html.js",
+  "main": "htm-x.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theproductiveprogrammer/htm-x.git"
