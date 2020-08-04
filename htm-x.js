@@ -5,7 +5,7 @@
  * attributes and children
  */
 function h(tag, attr, children) {
-  if(typeof attr != 'object' || Array.isArray(attr)) {
+  if(typeof attr!='object'||Array.isArray(attr)||isNode(atr)) {
     children = attr
     attr = {}
   }
