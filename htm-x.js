@@ -12,12 +12,45 @@ function h(tag, attr, children) {
     attr = {}
   }
 
+  tag = xtract(tag, attr)
+
   let e = document.createElement(tag)
 
   addAttributes(e, attr)
   addChildren(e, children)
 
   return e
+}
+
+/*    understand/
+ * The tag can be a 'short-form' like 'div#id.class1.class2'
+ * and the attributes can contain 'classes' and 'class'
+ * values.
+ *    way/
+ * We 'standardize' classes/class attribute to 'class'
+ * and then we break up and add any additional classes
+ * and id
+ */
+function xtract(tag, attr) {
+  if(attr.class && attr.classes) attr.class += " "+attr.classes
+  else if(attr.classes)  attr.class = attr.classes
+  else if(!attr.class) attr.class = ""
+  delete attr.classes
+
+  tag = tag.replace(/#/g, ".#")
+  let s = tag.split('.')
+  tag = s.shift()
+  if(!tag) tag = "div"
+  for(let i = 0;i < s.length;i++) {
+    if(s[i][0] == '#') {
+      if(!attr.id) attr.id = s[i].substring(1)
+    } else {
+      attr.class += " " + s[i]
+    }
+  }
+  if(!attr.class) delete attr.class
+
+  return tag
 }
 
 /*    way/
@@ -29,7 +62,7 @@ function addAttributes(e, attr) {
 
   for(let k in attr) {
 
-    if(k == 'class' || k == 'classes') {
+    if(k == 'class') {
 
       e.className = attr[k]
 
