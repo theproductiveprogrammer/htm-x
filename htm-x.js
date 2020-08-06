@@ -5,6 +5,8 @@
  * attributes and children
  */
 function h(tag, attr, children) {
+  if(!tag) return document.createElement('div')
+
   if(typeof attr!='object'||Array.isArray(attr)||isNode(attr)) {
     children = attr
     attr = {}
