@@ -75,7 +75,16 @@ myComponent(["item1", "item2", "item3"])
 //  </ul>
 ```
 
+## CSS Names
 
+We can also use “css names” for the tags as a shortcut instead of using `classes:` and `id:` attributes:
+
+```javascript
+h("ul#id.class1.class2")
+h(".class") // defaults to "div"
+```
+
+This is helpful in making the code cleaner in some cases.
 
 ---
 
