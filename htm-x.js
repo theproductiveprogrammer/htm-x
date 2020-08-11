@@ -19,6 +19,12 @@ function h(tag, attr, children) {
   addAttributes(e, attr)
   addChildren(e, children)
 
+  e.c = function() {
+    e.innerHTML = ""
+    addChildren(e, Array.prototype.slice.call(arguments))
+    return e
+  }
+
   return e
 }
 
