@@ -86,5 +86,88 @@ h(".class") // defaults to "div"
 
 This is helpful in making the code cleaner in some cases.
 
+## Keeping the Hierarchy Clean
+
+It can become hard to read nested tags when they are mixed with attributes and so on. For example:
+
+```javascript
+h("div#container", {
+  onclick: () =>...,
+  style: ...
+}, [
+  h("div.wrapper", [
+    h("div.main_content", {
+      onclick: () => ...
+    }, [
+      h('h1', "Main header"),
+      h('p', "This is the main content"),
+      h('div',...
+    ]),
+    h("div.sidebar", [
+      h("div.nav", [
+        h("div.item", "Nav1"),
+        h("div.item", "Nav2"),
+        h("div.item", "Nav3"),
+        ...
+      ])
+    ])
+  ])
+])
+```
+
+One way of handling this problem - given we have the full power of javascript - is to give the components names:
+
+```javascript
+let nav1 = h(".item", "Nav1")
+let nav2 = h(".item", "Nav2")
+let nav3 = h(".item", "Nav3")
+let nav = h(".nav", [ nav1, nav2, nav3 ])
+let sidebar = h(".sidebar", nav)
+
+let header = h("h1", "Main header")
+let content = h("p", "This is the main content")
+let mainContent = h(".main_content", [
+  header, content, ...
+])
+  
+let wrapper = h(".wrapper", [mainContent, sidebar])
+let container = h(".container", wrapper)
+```
+
+This is much ‘cleaner’ to read but we have two problems:
+
+1. While we can see each element in isolation we cannot see the entire hierarchy. We only know that ‘`container`’ container contains ‘`wrapper`’ and then we have to follow wrapper to trace what it contains and so on.
+2. In some ways the heirarchy is exactly backwards - we have to define container _last_ and the most in-depth element first.
+
+To solve both these problems you can use the `.c()` (set children) method. This allows us to give nicely defined names to each element (as above) but then stitch them all together neatly in one place:
+
+```javascript
+let container = h(".container")
+let wrapper = h(".wrapper")
+
+let mainContent = h(".main_content")
+let header = h("h1", "Main header")
+let content = h("p", "This is the main content")
+
+let sidebar = h(".sidebar")
+let nav = h(".nav")
+let nav1 = h(".item", "Nav1")
+let nav2 = h(".item", "Nav2")
+let nav3 = h(".item", "Nav3")
+
+return container.c(
+  wrapper.c(
+    mainContent.c(
+      header, content,...
+    ),
+    sidebar.c(
+      nav.c(nav1, nav2, nav3, ...)
+    )
+  )
+)
+```
+
+Now we can see the entire hierarchy neatly and also have it nicely named. With all these abilities it is easy to keep the generated HTML both understandable and easy to handle and mantain.
+
 ---
 
