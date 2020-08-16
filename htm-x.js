@@ -26,11 +26,12 @@ function h(tag, attr, children, ns) {
     children = attr
     attr = {}
   }
-  if(typeof tag != 'string') {
-    tag = 'div'
-    if(Array.isArray(tag)||isNode(tag)) children = tag
+  if(typeof tag == 'object') {
+    if(Array.isArray(tag) || isNode(tag)) children = tag
     else attr = tag
+    tag = ''
   }
+  if(!tag) tag = 'div'
 
   tag = xtract(tag, attr)
 
