@@ -1,10 +1,56 @@
 'use strict'
 
 /*    way/
- * create an element with the given tag and add the
- * attributes and children, defaulting to 'div'.
- *    eg/
- * All the following are supported:
+ * handle the various parameter possiblities (defaulting
+ * to tag = 'div'), extract classes and id's from css
+ * shortcuts, then create the given element tag,
+ * attributes and children. Add a `.c()` child creating
+ * additional function.
+ */
+function h(tag, attr, children) {
+  let args = handleParams('div', tag, attr, children)
+  args.tag = xtract(args.tag, args.attr)
+
+  let e = document.createElement(args.tag)
+  addAttributes(e, args.attr)
+  addChildren(e, args.children)
+
+  e.c = function() {
+    e.innerHTML = ""
+    addChildren(e, Array.prototype.slice.call(arguments))
+    return e
+  }
+
+  return e
+}
+
+/*    outcome/
+ * handle the various parameter possiblities (defaulting
+ * to tag = 'svg'), extract classes and id's from css
+ * shortcuts, then create the given element tag in SVG,
+ * attributes and children. Add a `.c()` child creating
+ * additional function.
+ */
+function svg(tag, attr, children) {
+  let args = handleParams('svg', tag, attr, children)
+  args.tag = xtract(args.tag, args.attr)
+
+  let e = document.createElementNS("http://www.w3.org/2000/svg", args.tag)
+  addAttributes(e, args.attr)
+  addChildren(e, args.children)
+
+  e.c = function() {
+    e.innerHTML = ""
+    addChildren(e, Array.prototype.slice.call(arguments))
+    return e
+  }
+
+  return e
+}
+
+/*    problem/
+ * Support all possible combinations of tags, attributes
+ * and children that the user provides:
  *    h('div', { id: "10" }, "child")
  *    h('div', { id: "10" }, ["child", "child"])
  *    h('div', { id: "10" }, h('span'))
@@ -20,33 +66,23 @@
  *    h(h('span'))
  *    h(['child'])
  */
-function h(tag, attr, children, ns) {
+function handleParams(defaultTag, tag, attr, children) {
 
-  if(typeof attr!='object'||Array.isArray(attr)||isNode(attr)) {
+  if(typeof attr!='object'
+    || Array.isArray(attr) || isNode(attr)) {
+
     children = attr
     attr = {}
   }
+
   if(typeof tag == 'object') {
     if(Array.isArray(tag) || isNode(tag)) children = tag
     else attr = tag
     tag = ''
   }
-  if(!tag) tag = 'div'
+  if(!tag) tag = defaultTag
 
-  tag = xtract(tag, attr)
-
-  let e = document.createElement(tag)
-
-  addAttributes(e, attr)
-  addChildren(e, children)
-
-  e.c = function() {
-    e.innerHTML = ""
-    addChildren(e, Array.prototype.slice.call(arguments))
-    return e
-  }
-
-  return e
+  return { tag, attr, children }
 }
 
 /*    understand/
@@ -172,4 +208,5 @@ module.exports = {
   h,
   x,
   div: x('div'),
+  svg,
 }
