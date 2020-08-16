@@ -2,14 +2,18 @@
 
 /*    way/
  * create an element with the given tag and add the
- * attributes and children
+ * attributes and children, defaulting to 'div'
  */
-function h(tag, attr, children) {
-  if(!tag) return document.createElement('div')
+function h(tag, attr, children, ns) {
 
   if(typeof attr!='object'||Array.isArray(attr)||isNode(attr)) {
     children = attr
     attr = {}
+  }
+  if(typeof tag != 'string') {
+    tag = 'div'
+    if(Array.isArray(tag)||isNode(tag)) children = tag
+    else attr = tag
   }
 
   tag = xtract(tag, attr)
