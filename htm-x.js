@@ -26,18 +26,21 @@ function h(tag, attr, children) {
 
 /*    outcome/
  * handle the various parameter possiblities (defaulting
- * to tag = 'svg'), extract classes and id's from css
- * shortcuts, then create the given element tag in SVG,
- * attributes and children. Add a `.c()` child creating
- * additional function.
+ * to tag = 'svg'), then create an SVG from the given
+ * tag, attributes, or children OR from the given
+ * SVG string (wrapped in a div)
  */
 function svg(tag, attr, children) {
   let args = handleParams('svg', tag, attr, children)
-  args.tag = xtract(args.tag, args.attr)
-
-  let e = document.createElementNS("http://www.w3.org/2000/svg", args.tag)
-  addAttributes(e, args.attr)
-  addChildren(e, args.children)
+  let e
+  if(args.tag[0] == "<") {
+    e = document.createElement('div')
+    e.innerHTML = tag
+  } else {
+    e = document.createElementNS("http://www.w3.org/2000/svg", args.tag)
+    addAttributes(e, args.attr)
+    addChildren(e, args.children)
+  }
 
   e.c = function() {
     e.innerHTML = ""
@@ -81,6 +84,7 @@ function handleParams(defaultTag, tag, attr, children) {
     tag = ''
   }
   if(!tag) tag = defaultTag
+  tag = tag.trim()
 
   return { tag, attr, children }
 }
