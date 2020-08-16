@@ -2,7 +2,23 @@
 
 /*    way/
  * create an element with the given tag and add the
- * attributes and children, defaulting to 'div'
+ * attributes and children, defaulting to 'div'.
+ *    eg/
+ * All the following are supported:
+ *    h('div', { id: "10" }, "child")
+ *    h('div', { id: "10" }, ["child", "child"])
+ *    h('div', { id: "10" }, h('span'))
+ *    h('div')
+ *    h('div', "child")
+ *    h('div', ["child", "child"])
+ *    h('div', h('span'))
+ *    h()
+ *    h({ id: "10" })
+ *    h({ id: "10" }, "child")
+ *    h({ id: "10" }, ["child", "child"])
+ *    h({ id: "10" }, h('span'))
+ *    h(h('span'))
+ *    h(['child'])
  */
 function h(tag, attr, children, ns) {
 
