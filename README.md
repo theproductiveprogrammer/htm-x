@@ -75,6 +75,25 @@ myComponent(["item1", "item2", "item3"])
 //  </ul>
 ```
 
+## SVG Support
+
+`htm-x` also creates [`SVG`](https://developer.mozilla.org/en-US/docs/Web/SVG) elements using the `svg()` function:
+
+```javascript
+const { svg } = require("@tpp/htm-x")
+
+let pic = svg({width: 100, height:100})
+pic.c(svg("circle", { r: 50, fill: "red" }))
+```
+
+You can also load SVG images directly:
+
+```javascript
+let pic = svg(`svg width="100%" height="100%" viewBox="0 0 57 57" version="1.1...`)
+```
+
+This is useful when loading svg images from file data.
+
 ## CSS Names
 
 We can also use “css names” for the tags as a shortcut instead of using `classes:` and `id:` attributes:
