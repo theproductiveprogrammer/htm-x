@@ -28,13 +28,13 @@ function h(tag, attr, children) {
  * handle the various parameter possiblities (defaulting
  * to tag = 'svg'), then create an SVG from the given
  * tag, attributes, or children OR from the given
- * SVG string (wrapped in a div)
+ * SVG string
  */
 function svg(tag, attr, children) {
   let args = handleParams('svg', tag, attr, children)
   let e
   if(args.tag[0] == "<") {
-    e = document.createElement('div')
+    e = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     e.innerHTML = tag
   } else {
     e = document.createElementNS("http://www.w3.org/2000/svg", args.tag)
