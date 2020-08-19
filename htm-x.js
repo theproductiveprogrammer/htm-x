@@ -32,6 +32,8 @@ function h(tag, attr, children) {
  */
 function svg(tag, attr, children) {
   let args = handleParams('svg', tag, attr, children)
+  args.tag = xtract(args.tag, args.attr)
+
   let e
   if(args.tag[0] == "<") {
     e = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -131,7 +133,7 @@ function addAttributes(e, attr) {
 
     if(k == 'class') {
 
-      e.className = attr[k]
+      e.setAttribute('class', attr[k])
 
     } else if(k == 'style') {
 
