@@ -21,6 +21,9 @@ function h(tag, attr, children) {
     return e
   }
 
+  e.attr = a => addAttributes(e, a)
+  e.add = c => addChildren(e, c)
+
   return e
 }
 
