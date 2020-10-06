@@ -76,7 +76,7 @@ function svg(tag, attr, children) {
  */
 function handleParams(defaultTag, tag, attr, children) {
 
-  if(typeof attr!='object'
+  if(attr === null || typeof attr!='object'
     || Array.isArray(attr) || isNode(attr)) {
 
     children = attr
