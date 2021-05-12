@@ -46,7 +46,7 @@ h('span', {
 Helpfully we can also create our own custom tag functions that can hold components applicable to our project:
 
 ```javascript
-const span = x('span')
+const span = x('span', { classes: "big red"})
 span("content")
 span({style: { color: "blue" }}, "content")
 
@@ -55,7 +55,7 @@ const bigText = x('span', {
   style: { color: "green" }
 })
 bigText("Green is Good")
-bigText({style: { color: "red" }}, "But Red is better")
+bigText({classes: "red"}, "But Red is better")
 ```
 
 Being functional, custom tags are also composable so you can do nice things like:
