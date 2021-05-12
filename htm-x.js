@@ -215,6 +215,12 @@ function x(tag, attr_) {
       children = attr
       attr = attr_
     } else {
+      if(attr && attr.class && attr_.class) {
+          attr.class = attr.class + " " + attr_.class
+      }
+      if(attr && attr.classes && attr_.classes) {
+          attr.classes = attr.classes + " " + attr_.classes
+      }
       attr = Object.assign(attr_, attr)
     }
 
