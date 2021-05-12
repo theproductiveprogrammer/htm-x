@@ -146,7 +146,10 @@ function addAttributes(e, attr) {
 
     if(k == 'class') {
 
-      e.setAttribute('class', attr[k])
+      if(attr[k]) {
+        const class_ = attr[k].trim().split(/[ \t]+/g).join(' ')
+        e.setAttribute('class', class_)
+      }
 
     } else if(k == 'style') {
 
@@ -207,24 +210,21 @@ function isNode(e) { return e && e.nodeName && e.nodeType }
  *    ])
  */
 function x(tag, attr_) {
-  if(!attr_) return (attr, children) => h(tag, attr, children)
+  let args = handleParams('div', tag, attr_)
+  args.tag = xtract(args.tag, args.attr)
 
-  return (attr, children) => {
+  if(!args.attr) return (attr, children) => h(args.tag, args.attr, children)
 
-    if(typeof attr == 'string' || Array.isArray(attr)) {
-      children = attr
-      attr = attr_
-    } else {
-      if(attr && attr.class && attr_.class) {
-          attr.class = attr.class + " " + attr_.class
-      }
-      if(attr && attr.classes && attr_.classes) {
-          attr.classes = attr.classes + " " + attr_.classes
-      }
-      attr = Object.assign(attr_, attr)
+  return (tag, attr, children) => {
+    let params = handleParams('div', tag, attr, children)
+    params.tag = xtract(params.tag, params.attr)
+
+    if(params.attr.class && args.attr.class) {
+      params.attr.class = args.attr.class + " " + params.attr.class
     }
+    params.attr = Object.assign({}, args.attr, params.attr)
 
-    return h(tag, attr, children)
+    return h(params.tag, params.attr, params.children)
   }
 }
 
@@ -235,3 +235,4 @@ module.exports = {
   div: x('div'),
   svg,
 }
+
