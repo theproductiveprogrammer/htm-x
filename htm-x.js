@@ -128,7 +128,7 @@ function handleParams(defaultTag, tag, attr, children) {
       r.tag = defaultTag
     }
     if(!v) return
-    if(Array.isArray(v) || isNode(v) || typeof v === 'string') {
+    if(Array.isArray(v) || isNode(v) || typeof v === 'string' || typeof v === 'number') {
       r.children = r.children.concat(v)
       return
     }
