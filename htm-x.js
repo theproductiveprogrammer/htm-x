@@ -203,7 +203,8 @@ function addAttributes(e, attr) {
 }
 
 function addChildren(e, children) {
-  if(!children || !children.length) return
+  if(!children) return
+  if(!Array.isArray(children)) children = [ children ]
 
   for(let i = 0;i < children.length;i++) {
     let curr = children[i]
