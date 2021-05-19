@@ -209,6 +209,10 @@ function addChildren(e, children) {
   for(let i = 0;i < children.length;i++) {
     let curr = children[i]
     if(!curr) continue
+    if(Array.isArray(curr)) {
+      addChildren(e, curr)
+      continue
+    }
     if(!isNode(curr)) curr = document.createTextNode(curr)
     e.appendChild(curr)
   }
