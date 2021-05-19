@@ -180,7 +180,9 @@ function addAttributes(e, attr) {
     if(k == 'class') {
 
       if(attr[k]) {
-        const class_ = attr[k].trim().split(/[ \t]+/g).join(' ')
+        const existing = e.getAttribute('class')
+        let class_ = attr[k].trim().split(/[ \t]+/g).join(' ')
+        if(existing) class_ += " " + existing;
         e.setAttribute('class', class_)
       }
 
