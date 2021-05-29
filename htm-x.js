@@ -44,7 +44,7 @@ function wrap(e) {
       e.innerHTML = arguments[0]
     } else {
       e.innerHTML = ""
-      addChildren(e, Array.prototype.slice.call(arguments))
+      if(arguments.length) addChildren(e, Array.prototype.slice.call(arguments))
     }
     return e
   }
