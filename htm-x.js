@@ -69,6 +69,7 @@ function svg(tag, attr, children) {
   if(args.tag[0] == "<") {
     e = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     e.innerHTML = tag
+    e = e.firstChild
   } else {
     e = document.createElementNS("http://www.w3.org/2000/svg", args.tag)
     addAttributes(e, args.attr)
