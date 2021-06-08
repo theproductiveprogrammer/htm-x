@@ -3,8 +3,10 @@
 /*    way/
  * find and return the element with the given id
  */
-function getH(id) {
-  return wrap(document.getElementById(id))
+function getH(id, e) {
+  if(!e) e = document
+  if(e.contentDocument) e = e.contentDocument
+  return wrap(e.getElementById(id))
 }
 
 /*    way/
