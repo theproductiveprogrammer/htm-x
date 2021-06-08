@@ -3,8 +3,9 @@
 /*    way/
  * find and return the element with the given id
  */
-function getH(id) {
-  return wrap(document.getElementById(id))
+function getH(id, e) {
+  if(!e) e = document
+  return wrap(e.getElementById(id))
 }
 
 /*    way/
@@ -51,6 +52,7 @@ function wrap(e) {
 
   e.attr = a => addAttributes(e, a)
   e.add = c => addChildren(e, c)
+  e.getH = id => getH(id, e)
 
   return e
 }
