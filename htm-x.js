@@ -203,6 +203,7 @@ function addAttributes(e, attr) {
     } else {
 
       if(attr[k] === false) e.removeAttribute(k)
+      else if(!attr[k]) e.setAttribute(k, "")
       else e.setAttribute(k, attr[k])
 
     }
