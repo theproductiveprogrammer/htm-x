@@ -181,7 +181,7 @@ function addAttributes(e, attr) {
 
   for(let k in attr) {
 
-    if(k == 'class') {
+    if(k === 'class' || k === 'classes') {
 
       if(attr[k]) {
         const existing = e.getAttribute('class')
@@ -190,7 +190,7 @@ function addAttributes(e, attr) {
         e.setAttribute('class', class_)
       }
 
-    } else if(k == 'style') {
+    } else if(k === 'style') {
 
       let style = attr[k]
       if(typeof style == 'string') e.style.cssText = style
