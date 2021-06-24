@@ -53,9 +53,27 @@ function wrap(e) {
 
   e.attr = a => addAttributes(e, a)
   e.add = c => addChildren(e, c)
+  e.addClass = c => addClass(e, c)
+  e.rmClass = c => rmClass(e, c)
 
   return e
 }
+
+function addClass(e, c) {
+  if(e.classList && e.classList.add) return e.classList.add(c)
+  const xist = e.getAttribute('class')
+  if(!xist) e.setAttribute('class', c)
+  else e.setAttribute('class', `${xist} ${c}`)
+}
+
+function rmClass(e, c) {
+  if(e.classList && e.classList.remove) return e.classList.remove(c)
+  const xist = e.getAttribute('class')
+  if(!xist) return
+  const updt = xist.split(' ').filter(c_ => c_ !== c).join(' ')
+  e.setAttribute('class', updt)
+}
+
 
 /*    outcome/
  * handle the various parameter possiblities (defaulting
