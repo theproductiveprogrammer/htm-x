@@ -1,6 +1,6 @@
 {
   "name": "@tpp/htm-x",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "description": "Simple and Clean HTML Node Generator",
   "main": "htm-x.js",
   "repository": {
@@ -9,6 +9,7 @@
   },
   "author": "charles.lobo@gmail.com",
   "license": "ISC",
+  "keywords": ["html","htm","dom","template"],
   "bugs": {
     "url": "https://github.com/theproductiveprogrammer/htm-x/issues"
   },
