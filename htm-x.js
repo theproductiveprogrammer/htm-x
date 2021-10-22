@@ -53,6 +53,7 @@ function wrap(e) {
 
   e.attr = a => addAttributes(e, a)
   e.add = c => addChildren(e, c)
+  e.rm = c => e.removeChild(c)
   e.addClass = c => addClass(e, c)
   e.rmClass = c => rmClass(e, c)
 
