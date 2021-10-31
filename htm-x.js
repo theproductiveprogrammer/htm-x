@@ -99,6 +99,7 @@ function svg(tag, attr, children) {
   }
 
   wrap(e)
+  return e
 }
 
 /*    problem/
