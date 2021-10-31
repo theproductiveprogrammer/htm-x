@@ -98,18 +98,7 @@ function svg(tag, attr, children) {
     addChildren(e, args.children)
   }
 
-  e.c = function() {
-    if(arguments.length === 1
-      && typeof arguments[0] === "string") {
-      e.innerHTML = arguments[0]
-    } else {
-      e.innerHTML = ""
-      addChildren(e, Array.prototype.slice.call(arguments))
-    }
-    return e
-  }
-
-  return e
+  wrap(e)
 }
 
 /*    problem/
