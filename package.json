@@ -1,6 +1,6 @@
 {
   "name": "@tpp/htm-x",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "description": "Simple and Clean HTML Node Generator",
   "main": "htm-x.js",
   "repository": {
