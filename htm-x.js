@@ -41,7 +41,7 @@ function makeElement(args) {
  */
 function wrap(e) {
   if(!e) return
-  e.c = function() {
+  if(!e.c) e.c = function() {
     if(arguments.length === 1
       && typeof arguments[0] === "string") {
       e.innerHTML = arguments[0]
@@ -52,11 +52,11 @@ function wrap(e) {
     return e
   }
 
-  e.attr = a => addAttributes(e, a)
-  e.add = c => addChildren(e, c)
-  e.rm = c => e.removeChild(c)
-  e.addClass = c => addClass(e, c)
-  e.rmClass = c => rmClass(e, c)
+  if(!e.attr) e.attr = a => addAttributes(e, a)
+  if(!e.add) e.add = c => addChildren(e, c)
+  if(!e.rm) e.rm = c => e.removeChild(c)
+  if(!e.addClass) e.addClass = c => addClass(e, c)
+  if(!e.rmClass) e.rmClass = c => rmClass(e, c)
 
   return e
 }
