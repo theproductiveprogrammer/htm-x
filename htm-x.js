@@ -52,11 +52,11 @@ function wrap(e) {
     return e
   }
 
-  if(!e.attr) e.attr = a => addAttributes(e, a)
-  if(!e.add) e.add = c => addChildren(e, c)
-  if(!e.rm) e.rm = c => e.removeChild(c)
-  if(!e.addClass) e.addClass = c => addClass(e, c)
-  if(!e.rmClass) e.rmClass = c => rmClass(e, c)
+  e.attr = a => addAttributes(e, a)
+  e.add = c => addChildren(e, c)
+  e.rm = c => e.removeChild(c)
+  e.addClass = c => addClass(e, c)
+  e.rmClass = c => rmClass(e, c)
 
   return e
 }
